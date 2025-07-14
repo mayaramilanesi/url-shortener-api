@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UrlsModule } from './urls/urls.module';
+import { UrlsModule } from './urls/urls.module';
 
 @Module({
   imports: [
