@@ -36,9 +36,7 @@ export class UrlsService {
 
   async shortenUrl(targetUrl: string): Promise<string> {
     const urlEntity = await this.shorten(targetUrl);
-    const base =
-      this.config.get('BASE_URL') ||
-      `http://localhost:${this.config.get('PORT')}`;
+    const base = process.env.BASE_URL || 'http://localhost:3000';
     return `${base}/${urlEntity.code}`;
   }
 }
