@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { ConfigService } from '@nestjs/config';
 import { Url } from './entities/url.entity';
 import { customAlphabet } from 'nanoid';
 
@@ -14,6 +15,7 @@ export class UrlsService {
   constructor(
     @InjectRepository(Url)
     private readonly urlRepo: Repository<Url>,
+    private readonly config: ConfigService,
   ) {}
 
   private async genUniqueCode(): Promise<string> {
@@ -30,5 +32,13 @@ export class UrlsService {
     const code = await this.genUniqueCode();
     const url = this.urlRepo.create({ code, targetUrl });
     return this.urlRepo.save(url);
+  }
+
+  async shortenUrl(targetUrl: string): Promise<string> {
+    const urlEntity = await this.shorten(targetUrl);
+    const base =
+      this.config.get('BASE_URL') ||
+      `http://localhost:${this.config.get('PORT')}`;
+    return `${base}/${urlEntity.code}`;
   }
 }
