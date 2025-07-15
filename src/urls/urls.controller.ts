@@ -20,15 +20,6 @@ import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 export class UrlsController {
   constructor(private readonly urlsService: UrlsService) {}
 
-  @Get(':code')
-  async handleRedirect(
-    @Param('code') code: string,
-    @Res() res: Response,
-  ): Promise<void> {
-    const url = await this.urlsService.getAndCountUrlByCode(code);
-    res.redirect(url.targetUrl);
-  }
-
   @Get()
   list(@Request() req) {
     return this.urlsService.findByOwner(req.user.userId);
