@@ -1,10 +1,4 @@
-import {
-  Body,
-  Controller,
-  Post,
-  Req,
-  UnauthorizedException,
-} from '@nestjs/common';
+import { Body, Controller, Post, Req } from '@nestjs/common';
 import { Request } from 'express';
 import { UrlsService } from './urls.service';
 import { CreateUrlDto } from './dto/create-url.dto';
@@ -18,7 +12,7 @@ export class ShortenController {
     @Body() dto: CreateUrlDto,
     @Req() req: Request & { user?: { userId: string } },
   ) {
-    const ownerId = req.user?.userId;
+    const ownerId = req.user?.userId || undefined;
     const shortUrl = await this.urlsService.shortenUrl(dto.url, ownerId);
     return { shortUrl };
   }

@@ -34,9 +34,12 @@ export class UrlsService {
     ownerId: string | undefined,
   ): Promise<string> {
     const code = await this.genUniqueCode();
-    const url = this.urlRepo.create({ code, targetUrl, ownerId });
+    const url = this.urlRepo.create({
+      code,
+      targetUrl,
+      ownerId,
+    });
     const saved = await this.urlRepo.save(url);
-
     const base = this.config.get<string>('BASE_URL')!;
     return `${base}/${saved.code}`;
   }
