@@ -29,10 +29,16 @@ export class UrlsService {
     return this.urlRepo.save(url);
   }
 
-  async shortenUrl(targetUrl: string): Promise<string> {
-    const urlEntity = await this.shorten(targetUrl);
-    const base = process.env.BASE_URL || 'http://localhost:3000';
-    return `${base}/${urlEntity.code}`;
+  async shortenUrl(
+    targetUrl: string,
+    ownerId: string | undefined,
+  ): Promise<string> {
+    const code = await this.genUniqueCode();
+    const url = this.urlRepo.create({ code, targetUrl, ownerId });
+    const saved = await this.urlRepo.save(url);
+
+    const base = this.config.get<string>('BASE_URL')!;
+    return `${base}/${saved.code}`;
   }
 
   async findByCode(code: string): Promise<Url> {
