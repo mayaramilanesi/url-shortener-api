@@ -13,8 +13,11 @@ import { UrlsService } from './urls.service';
 import { CreateUrlDto } from './dto/create-url.dto';
 import { Response } from 'express';
 import { UpdateUrlDto } from './dto/update-url.dto';
+import { UseGuards } from '@nestjs/common';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
-@Controller()
+@UseGuards(JwtAuthGuard)
+@Controller('urls')
 export class UrlsController {
   constructor(private readonly urlsService: UrlsService) {}
 
