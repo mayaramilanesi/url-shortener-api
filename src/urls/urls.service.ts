@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { ConfigService } from '@nestjs/config';
@@ -38,5 +38,25 @@ export class UrlsService {
     const urlEntity = await this.shorten(targetUrl);
     const base = process.env.BASE_URL || 'http://localhost:3000';
     return `${base}/${urlEntity.code}`;
+  }
+
+  async findByCode(code: string): Promise<Url> {
+    const url = await this.urlRepo.findOne({
+      where: { code, deletedAt: undefined },
+    });
+    if (!url) throw new NotFoundException('Short URL not found');
+    return url;
+  }
+
+  async incrementClickCount(url: Url): Promise<void> {
+    url.clickCount++;
+    await this.urlRepo.save(url);
+  }
+
+  async getAndCountUrlByCode(code: string): Promise<Url> {
+    const url = await this.findByCode(code);
+    url.clickCount++;
+    await this.urlRepo.save(url);
+    return url;
   }
 }
