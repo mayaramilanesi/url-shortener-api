@@ -10,7 +10,6 @@ import {
   Res,
 } from '@nestjs/common';
 import { UrlsService } from './urls.service';
-import { CreateUrlDto } from './dto/create-url.dto';
 import { Response } from 'express';
 import { UpdateUrlDto } from './dto/update-url.dto';
 import { UseGuards } from '@nestjs/common';
@@ -20,12 +19,6 @@ import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 @Controller('urls')
 export class UrlsController {
   constructor(private readonly urlsService: UrlsService) {}
-
-  @Post('shorten')
-  async shorten(@Body() dto: CreateUrlDto) {
-    const shortUrl = await this.urlsService.shortenUrl(dto.url);
-    return { shortUrl };
-  }
 
   @Get(':code')
   async handleRedirect(
