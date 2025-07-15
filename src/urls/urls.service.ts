@@ -54,4 +54,31 @@ export class UrlsService {
     await this.urlRepo.save(url);
     return url;
   }
+
+  async findByOwner(userId: string): Promise<Url[]> {
+    return this.urlRepo.find({
+      where: { ownerId: userId, deletedAt: undefined },
+      order: { createdAt: 'DESC' },
+    });
+  }
+
+  async updateForOwner(
+    id: string,
+    userId: string,
+    newTargetUrl: string,
+  ): Promise<Url> {
+    const url = await this.urlRepo.findOne({
+      where: { id, ownerId: userId, deletedAt: undefined },
+    });
+    if (!url) throw new NotFoundException('URL not found or access denied');
+    url.targetUrl = newTargetUrl;
+    return this.urlRepo.save(url);
+  }
+
+  async softRemoveForOwner(id: string, userId: string): Promise<void> {
+    const result = await this.urlRepo.softDelete({ id, ownerId: userId });
+    if (result.affected === 0) {
+      throw new NotFoundException('URL not found or access denied');
+    }
+  }
 }

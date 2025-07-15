@@ -12,6 +12,7 @@ import {
 import { UrlsService } from './urls.service';
 import { CreateUrlDto } from './dto/create-url.dto';
 import { Response } from 'express';
+import { UpdateUrlDto } from './dto/update-url.dto';
 
 @Controller()
 export class UrlsController {
