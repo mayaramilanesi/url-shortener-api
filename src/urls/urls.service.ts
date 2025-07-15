@@ -3,12 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { ConfigService } from '@nestjs/config';
 import { Url } from './entities/url.entity';
-import { customAlphabet } from 'nanoid';
-
-const nanoid = customAlphabet(
-  '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz',
-  6,
-);
+import { nanoid } from '../utils/nanoid.util';
 
 @Injectable()
 export class UrlsService {
