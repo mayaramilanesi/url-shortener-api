@@ -60,6 +60,129 @@ This project includes comprehensive API documentation powered by Swagger/OpenAPI
 
 ---
 
+## 🧪 Testing
+
+Esta API conta com uma suíte completa de testes automatizados, garantindo qualidade e confiabilidade do código.
+
+### 📊 **Cobertura Atual dos Testes**
+
+- ✅ **75 testes** passando (46 unitários + 29 e2e)
+- 📈 **67.53% cobertura** de statements
+- 🎯 **76.47% cobertura** de funções
+- 🏆 **100% cobertura** nos services principais
+
+### 🔧 **Comandos Disponíveis**
+
+```bash
+# Testes Unitários
+npm run test:unit          # Executa apenas testes unitários
+npm run test:unit:watch    # Modo watch para desenvolvimento
+
+# Testes E2E (End-to-End)
+npm run test:e2e           # Executa testes de integração completos
+
+# Todos os Testes
+npm run test:all           # Executa unitários + e2e em sequência
+npm run test:ci            # Para CI/CD (sem watch, com coverage)
+
+# Relatórios de Cobertura
+npm run test:cov           # Relatório no terminal
+npm run test:cov:html      # Gera relatório HTML interativo
+npm run test:cov:unit      # Cobertura apenas dos testes unitários
+npm run test:cov:e2e       # Cobertura apenas dos testes e2e
+
+# Abrir relatório HTML no navegador
+open coverage/index.html   # macOS
+```
+
+### 📁 **Estrutura dos Testes**
+
+```
+test/
+├── app.e2e-spec.ts           # Testes e2e completos
+├── jest-e2e.json             # Configuração Jest e2e
+├── setup.ts                  # Setup global para testes
+├── test-app.module.ts        # Módulo da aplicação para testes
+└── test-database.module.ts   # Configuração banco SQLite
+
+src/
+├── **/*.spec.ts              # Testes unitários ao lado do código
+├── auth/auth.service.spec.ts  # Testes do AuthService
+├── users/users.service.spec.ts # Testes do UsersService
+└── urls/urls.service.spec.ts   # Testes do UrlsService
+```
+
+### 🎯 **O que está sendo testado**
+
+#### **Testes Unitários (46 testes)**
+
+- ✅ **UrlsService**: Encurtamento, redirecionamento, CRUD de URLs
+- ✅ **AuthService**: Signup, login, validação JWT
+- ✅ **UsersService**: Criação e busca de usuários
+- ✅ **Controllers**: Validação de chamadas e parâmetros
+
+#### **Testes E2E (29 testes)**
+
+- 🏥 **Health Check**: Endpoint de saúde da API
+- 📖 **Documentação**: Swagger UI e páginas HTML
+- 🔐 **Autenticação**: Fluxos completos de signup/login
+- ✂️ **Encurtamento**: URLs anônimas e autenticadas
+- 📋 **Gerenciamento**: CRUD completo de URLs
+- 🔗 **Redirecionamento**: Funcionamento e contagem de cliques
+- ⚠️ **Tratamento de Erros**: Validações e casos limite
+
+### 📊 **Interpretando o Relatório de Cobertura**
+
+O relatório HTML (`coverage/index.html`) mostra:
+
+- 🟢 **Linhas Verdes**: Código coberto pelos testes
+- 🔴 **Linhas Vermelhas**: Código não testado
+- 🟡 **Linhas Amarelas**: Código parcialmente testado
+
+**Métricas principais:**
+
+- **Statements**: Porcentagem de linhas executadas
+- **Branches**: Porcentagem de condicionais testadas (if/else)
+- **Functions**: Porcentagem de funções chamadas
+- **Lines**: Porcentagem de linhas físicas cobertas
+
+### 🚀 **Executando Testes Durante Desenvolvimento**
+
+```bash
+# Para desenvolvimento ativo
+npm run test:unit:watch    # Reexecuta testes quando arquivos mudam
+
+# Para validação completa
+npm run test:all           # Roda tudo antes de commit
+
+# Para debugging
+npm run test:unit -- --verbose  # Mais detalhes dos testes
+```
+
+### 🔄 **CI/CD**
+
+Os testes são executados automaticamente em:
+
+- **Push/PR**: Testes unitários e e2e
+- **Coverage check**: Verifica se cobertura atende aos thresholds
+- **Ambiente isolado**: Cada teste usa banco SQLite in-memory
+
+### 🤝 **Contribuindo com Testes**
+
+1. **Novos features**: Sempre incluir testes unitários
+2. **Bug fixes**: Adicionar teste que reproduz o bug
+3. **Controllers**: Testes unitários para validação de chamadas
+4. **Services**: Testes abrangentes com mocks adequados
+5. **E2E**: Para fluxos completos de usuário
+
+**Convenções:**
+
+- Arquivos de teste: `*.spec.ts` (unitários) e `*.e2e-spec.ts` (e2e)
+- Mocks: Use Jest mocks para dependências externas
+- Cleanup: Sempre limpe dados de teste (especialmente e2e)
+
+---
+
 ## 📦 Docker Compose
 
 Prerequisites: Docker & Docker Compose installed.
@@ -141,24 +264,42 @@ Prerequisites: Docker & Docker Compose installed.
 
 ```
 .
-├── src
-│   ├── auth
-│   ├── common
-│   │   └── health.controller.ts
-│   ├── docs
+├── src/
+│   ├── auth/
+│   │   ├── *.spec.ts              # Testes unitários
+│   │   ├── auth.controller.ts
+│   │   ├── auth.service.ts
+│   │   └── dto/
+│   ├── docs/
 │   │   ├── docs.controller.ts
 │   │   └── docs.module.ts
-│   ├── users
-│   ├── urls
-│   │   ├── dto
-│   │   ├── entities
+│   ├── users/
+│   │   ├── *.spec.ts              # Testes unitários
+│   │   ├── users.service.ts
+│   │   └── entities/
+│   ├── urls/
+│   │   ├── *.spec.ts              # Testes unitários
+│   │   ├── dto/
+│   │   ├── entities/
 │   │   ├── redirect.controller.ts
 │   │   ├── shorten.controller.ts
 │   │   ├── urls.controller.ts
 │   │   └── urls.service.ts
+│   ├── utils/
+│   │   └── nanoid.util.ts
+│   ├── app.controller.ts
 │   ├── app.module.ts
+│   ├── app.service.ts
 │   └── main.ts
-├── test
+├── test/
+│   ├── app.e2e-spec.ts           # Testes e2e completos
+│   ├── jest-e2e.json             # Config Jest e2e
+│   ├── setup.ts                  # Setup global
+│   ├── test-app.module.ts        # Módulo para testes
+│   └── test-database.module.ts   # Config banco SQLite
+├── coverage/                     # Relatórios de cobertura
+│   └── index.html               # Relatório HTML interativo
+├── jest.config.ts               # Configuração Jest principal
 ├── .env.example
 ├── .gitignore
 ├── Dockerfile
