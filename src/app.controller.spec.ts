@@ -15,8 +15,15 @@ describe('AppController', () => {
   });
 
   describe('root', () => {
-    it('should return "Hello World!"', () => {
-      expect(appController.getHello()).toBe('Hello World!');
+    it('should return health check object', () => {
+      const result = appController.getHello();
+      expect(result).toEqual({
+        message: 'Hello World!',
+        status: 'ok',
+        timestamp: expect.any(String),
+        service: 'URL Shortener API',
+        version: '1.0.0',
+      });
     });
   });
 });

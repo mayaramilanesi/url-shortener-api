@@ -45,11 +45,19 @@ describe('App (e2e)', () => {
   });
 
   describe('Health Check', () => {
-    it('/ (GET) should return Hello World', () => {
+    it('/ (GET) should return health status', () => {
       return request(app.getHttpServer())
         .get('/')
         .expect(200)
-        .expect('Hello World!');
+        .expect((res) => {
+          expect(res.body).toEqual({
+            message: 'Hello World!',
+            status: 'ok',
+            timestamp: expect.any(String),
+            service: 'URL Shortener API',
+            version: '1.0.0',
+          });
+        });
     });
   });
 
