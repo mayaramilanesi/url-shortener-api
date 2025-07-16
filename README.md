@@ -18,6 +18,33 @@ Anyone can shorten a URL to a 6-character code; authenticated users can manage (
   - **Delete**: `DELETE /urls/:id` → soft-delete (logical delete)
 - **Audit fields**: `createdAt`, `updatedAt`, `deletedAt` on every record
 - **Health check**: `GET /` returns `{ status: 'ok', timestamp }`
+- **API Documentation**: Complete Swagger/OpenAPI documentation with interactive testing
+
+---
+
+## 📖 API Documentation
+
+This project includes comprehensive API documentation powered by Swagger/OpenAPI:
+
+### 🔗 Access Documentation
+
+- **Interactive Swagger UI**: `http://localhost:8080/docs`
+  - Test all endpoints directly in your browser
+  - Built-in JWT authentication
+  - Real-time request/response examples
+- **HTML Documentation**: `http://localhost:8080/readme`
+  - Beautiful, responsive documentation page
+  - Complete API guide for beginners
+  - Mobile-friendly interface
+
+### ✨ Documentation Features
+
+- **Complete endpoint coverage** with detailed descriptions
+- **Request/response examples** in multiple formats
+- **Authentication flows** with JWT token management
+- **Error handling** documentation with status codes
+- **Data model schemas** with validation rules
+- **Interactive testing** directly from the browser
 
 ---
 
@@ -27,6 +54,7 @@ Anyone can shorten a URL to a 6-character code; authenticated users can manage (
 - Node.js >=20.x (locked in `package.json` engines)
 - PostgreSQL 15 via TypeORM
 - JWT for authentication
+- Swagger/OpenAPI for API documentation
 - dotenv for environment configuration
 - Docker & Docker Compose for local development
 
@@ -56,11 +84,15 @@ Prerequisites: Docker & Docker Compose installed.
    docker-compose up --build
    ```
 3. The API will be available at `http://localhost:8080`.
-   - Health: `GET /`
-   - Shorten: `POST /shorten`
-   - Redirect: `GET /:code`
-   - Auth: `POST /auth/signup`, `POST /auth/login`
-   - URLs management (auth): `GET /urls`, `PATCH /urls/:id`, `DELETE /urls/:id`
+   - **📖 Documentation**:
+     - Swagger UI: `http://localhost:8080/docs`
+     - HTML Guide: `http://localhost:8080/readme`
+   - **🏥 Health**: `GET /`
+   - **✂️ Core Features**:
+     - Shorten: `POST /shorten`
+     - Redirect: `GET /:code`
+   - **🔐 Authentication**: `POST /auth/signup`, `POST /auth/login`
+   - **📋 URL Management** (auth required): `GET /urls`, `PATCH /urls/:id`, `DELETE /urls/:id`
 
 ---
 
@@ -93,6 +125,8 @@ Prerequisites: Docker & Docker Compose installed.
 | Method | Path           | Description                                             | Auth required |
 | ------ | -------------- | ------------------------------------------------------- | ------------- |
 | GET    | `/`            | Health check                                            | No            |
+| GET    | `/docs`        | 📖 Interactive Swagger UI documentation                 | No            |
+| GET    | `/readme`      | 📄 HTML documentation page                              | No            |
 | POST   | `/shorten`     | Shorten a URL (body: `{ url: string }`)                 | No            |
 | GET    | `/:code`       | Redirect to original URL and increment click count      | No            |
 | POST   | `/auth/signup` | Register new user (body: `{ email, password }`)         | No            |
@@ -111,6 +145,9 @@ Prerequisites: Docker & Docker Compose installed.
 │   ├── auth
 │   ├── common
 │   │   └── health.controller.ts
+│   ├── docs
+│   │   ├── docs.controller.ts
+│   │   └── docs.module.ts
 │   ├── users
 │   ├── urls
 │   │   ├── dto
@@ -128,6 +165,7 @@ Prerequisites: Docker & Docker Compose installed.
 ├── docker-compose.yml
 ├── package.json
 ├── tsconfig.json
+├── SWAGGER_DOCUMENTATION.md
 └── README.md
 ```
 
@@ -149,7 +187,18 @@ Release tags:
 - `v0.1.0` — basic shortener endpoint
 - `v0.2.0` — authentication implemented
 - `v0.3.0` — per-user URL management
-- `v0.4.0` — Docker & health check
+- `v0.4.0` — complete Swagger/OpenAPI documentation
+
+---
+
+## 📚 Contributing to Documentation
+
+The API documentation is automatically generated from code annotations. To update documentation:
+
+1. Update Swagger decorators in controllers (`@ApiOperation`, `@ApiResponse`, etc.)
+2. Update DTOs with `@ApiProperty` annotations
+3. Modify `SWAGGER_DOCUMENTATION.md` for additional guidance
+4. The documentation will be automatically updated when the application restarts
 
 ---
 
