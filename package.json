@@ -26,7 +26,14 @@
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "test:unit": "jest --testPathIgnorePatterns=.*\\.e2e-spec\\.ts$",
     "test:all": "npm run test:unit && npm run test:e2e",
-    "test:ci": "npm run test:unit && npm run test:cov:html"
+    "test:ci": "npm run test:unit && npm run test:cov:html",
+    "docker:setup": "cp .env.example .env 2>/dev/null || true",
+    "docker:build": "docker-compose build --no-cache",
+    "docker:up": "docker-compose up -d",
+    "docker:down": "docker-compose down",
+    "docker:logs": "docker-compose logs -f",
+    "docker:clean": "docker-compose down -v --rmi all",
+    "dev:quick": "npm run docker:setup && docker-compose up --build"
   },
   "dependencies": {
     "@nestjs/common": "^11.0.1",

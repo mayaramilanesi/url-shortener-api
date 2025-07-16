@@ -3,6 +3,25 @@
 A scalable, RESTful URL shortening service built with NestJS and TypeScript.  
 Anyone can shorten a URL to a 6-character code; authenticated users can manage (list, update, delete) their own links, track click counts, and soft-delete records.
 
+## ⚡ Super Quick Start
+
+**Want to run this project instantly? Just one command:**
+
+```bash
+make setup
+```
+
+**That's it!** 🎉 Your API will be running at `http://localhost:8080` with full documentation at `/docs`.
+
+> **Prerequisites:** Docker & Docker Compose installed. Everything else is automatic!
+
+**Alternative commands:**
+
+- `./quick-start.sh` (bash script)
+- `npm run dev:quick` (npm script)
+
+📖 **[See QUICK_START.md for details](QUICK_START.md)**
+
 ---
 
 ## 🚀 Features
@@ -62,74 +81,74 @@ This project includes comprehensive API documentation powered by Swagger/OpenAPI
 
 ## 🧪 Testing
 
-Esta API conta com uma suíte completa de testes automatizados, garantindo qualidade e confiabilidade do código.
+This API features a complete automated testing suite, ensuring code quality and reliability.
 
-### 📊 **Cobertura Atual dos Testes**
+### 📊 **Current Test Coverage**
 
-- ✅ **75 testes** passando (46 unitários + 29 e2e)
-- 📈 **67.53% cobertura** de statements
-- 🎯 **76.47% cobertura** de funções
-- 🏆 **100% cobertura** nos services principais
+- ✅ **75 tests** passing (46 unit + 29 e2e)
+- 📈 **67.53% statement coverage**
+- 🎯 **76.47% function coverage**
+- 🏆 **100% coverage** on main services
 
-### 🔧 **Comandos Disponíveis**
+### 🔧 **Available Commands**
 
 ```bash
-# Testes Unitários
-npm run test:unit          # Executa apenas testes unitários
-npm run test:unit:watch    # Modo watch para desenvolvimento
+# Unit Tests
+npm run test:unit          # Run unit tests only
+npm run test:unit:watch    # Watch mode for development
 
-# Testes E2E (End-to-End)
-npm run test:e2e           # Executa testes de integração completos
+# E2E (End-to-End) Tests
+npm run test:e2e           # Run complete integration tests
 
-# Todos os Testes
-npm run test:all           # Executa unitários + e2e em sequência
-npm run test:ci            # Para CI/CD (sem watch, com coverage)
+# All Tests
+npm run test:all           # Run unit + e2e in sequence
+npm run test:ci            # For CI/CD (no watch, with coverage)
 
-# Relatórios de Cobertura
-npm run test:cov           # Relatório no terminal
-npm run test:cov:html      # Gera relatório HTML interativo
-npm run test:cov:unit      # Cobertura apenas dos testes unitários
-npm run test:cov:e2e       # Cobertura apenas dos testes e2e
+# Coverage Reports
+npm run test:cov           # Terminal report
+npm run test:cov:html      # Generate interactive HTML report
+npm run test:cov:unit      # Coverage for unit tests only
+npm run test:cov:e2e       # Coverage for e2e tests only
 
-# Abrir relatório HTML no navegador
+# Open HTML report in browser
 open coverage/index.html   # macOS
 ```
 
-### 📁 **Estrutura dos Testes**
+### 📁 **Test Structure**
 
 ```
 test/
-├── app.e2e-spec.ts           # Testes e2e completos
-├── jest-e2e.json             # Configuração Jest e2e
-├── setup.ts                  # Setup global para testes
-├── test-app.module.ts        # Módulo da aplicação para testes
-└── test-database.module.ts   # Configuração banco SQLite
+├── app.e2e-spec.ts           # Complete e2e tests
+├── jest-e2e.json             # Jest e2e configuration
+├── setup.ts                  # Global test setup
+├── test-app.module.ts        # Application module for tests
+└── test-database.module.ts   # SQLite database configuration
 
 src/
-├── **/*.spec.ts              # Testes unitários ao lado do código
-├── auth/auth.service.spec.ts  # Testes do AuthService
-├── users/users.service.spec.ts # Testes do UsersService
-└── urls/urls.service.spec.ts   # Testes do UrlsService
+├── **/*.spec.ts              # Unit tests alongside code
+├── auth/auth.service.spec.ts  # AuthService tests
+├── users/users.service.spec.ts # UsersService tests
+└── urls/urls.service.spec.ts   # UrlsService tests
 ```
 
-### 🎯 **O que está sendo testado**
+### 🎯 **What's Being Tested**
 
-#### **Testes Unitários (46 testes)**
+#### **Unit Tests (46 tests)**
 
-- ✅ **UrlsService**: Encurtamento, redirecionamento, CRUD de URLs
-- ✅ **AuthService**: Signup, login, validação JWT
-- ✅ **UsersService**: Criação e busca de usuários
-- ✅ **Controllers**: Validação de chamadas e parâmetros
+- ✅ **UrlsService**: Shortening, redirection, URL CRUD
+- ✅ **AuthService**: Signup, login, JWT validation
+- ✅ **UsersService**: User creation and search
+- ✅ **Controllers**: Call validation and parameters
 
-#### **Testes E2E (29 testes)**
+#### **E2E Tests (29 tests)**
 
-- 🏥 **Health Check**: Endpoint de saúde da API
-- 📖 **Documentação**: Swagger UI e páginas HTML
-- 🔐 **Autenticação**: Fluxos completos de signup/login
-- ✂️ **Encurtamento**: URLs anônimas e autenticadas
-- 📋 **Gerenciamento**: CRUD completo de URLs
-- 🔗 **Redirecionamento**: Funcionamento e contagem de cliques
-- ⚠️ **Tratamento de Erros**: Validações e casos limite
+- 🏥 **Health Check**: API health endpoint
+- 📖 **Documentation**: Swagger UI and HTML pages
+- 🔐 **Authentication**: Complete signup/login flows
+- ✂️ **URL Shortening**: Anonymous and authenticated URLs
+- 📋 **Management**: Complete URL CRUD
+- 🔗 **Redirection**: Functionality and click counting
+- ⚠️ **Error Handling**: Validations and edge cases
 
 ### 📊 **Interpretando o Relatório de Cobertura**
 
@@ -183,39 +202,111 @@ Os testes são executados automaticamente em:
 
 ---
 
-## 📦 Docker Compose
+## 🚀 Quick Start (Docker)
 
-Prerequisites: Docker & Docker Compose installed.
+**Prerequisites:** Docker & Docker Compose installed.
 
-1. Copy the environment template
+### 🎯 **Single Command - Run Everything Automatically**
+
+```bash
+# Option 1: Using Make (recommended)
+make setup
+
+# Option 2: Using bash script
+./quick-start.sh
+
+# Option 3: Using npm
+npm run dev:quick
+```
+
+**That's it!** 🎉 In a few seconds you'll have:
+
+- ✅ PostgreSQL database configured automatically
+- ✅ API running at `http://localhost:8080`
+- ✅ `.env` file created with default settings
+- ✅ Everything working without any manual configuration
+
+### 📱 **Accessing the API**
+
+After running the command above, access:
+
+- **🌐 API**: `http://localhost:8080`
+- **📖 Swagger UI**: `http://localhost:8080/docs`
+- **📄 Documentação HTML**: `http://localhost:8080/readme`
+- **🏥 Health Check**: `GET http://localhost:8080`
+
+### 🔧 **Management Commands**
+
+```bash
+# View real-time logs
+make logs
+# or: docker-compose logs -f
+
+# Stop containers
+make stop
+# or: docker-compose down
+
+# Restart
+make restart
+
+# Container status
+make status
+# or: docker-compose ps
+
+# Complete cleanup
+make clean
+
+# View all available commands
+make help
+```
+
+### ⚙️ **Available NPM Scripts**
+
+```bash
+npm run dev:quick       # Quick setup + start
+npm run docker:setup    # Create .env file
+npm run docker:build    # Build images
+npm run docker:up       # Start containers
+npm run docker:down     # Stop containers
+npm run docker:logs     # View logs
+npm run docker:clean    # Complete cleanup
+```
+
+### 🎛️ **Manual Configuration (Optional)**
+
+If you want to customize the settings:
+
+1. **Create `.env` file** (if it doesn't exist):
+
    ```bash
    cp .env.example .env
    ```
-   Then edit `.env`, replacing placeholders:
+
+2. **Edit `.env`** with your settings:
+
    ```dotenv
-   POSTGRES_USER=<YOUR_DB_USER>
-   POSTGRES_PASSWORD=<YOUR_DB_PASSWORD>
-   POSTGRES_DB=<YOUR_DB_NAME>
-   DATABASE_URL=postgres://<YOUR_DB_USER>:<YOUR_DB_PASSWORD>@db:5432/<YOUR_DB_NAME>
+   POSTGRES_USER=urlshortener
+   POSTGRES_PASSWORD=password123
+   POSTGRES_DB=urlshortener_db
+   DATABASE_URL=postgres://urlshortener:password123@db:5432/urlshortener_db
    PORT=8080
    BASE_URL=http://localhost:8080
-   JWT_SECRET=<YOUR_JWT_SECRET>
+   JWT_SECRET=super-secret-jwt-key-change-in-production
    JWT_EXPIRES_IN=3600s
    ```
-2. Bring up the stack
+
+3. **Start containers**:
    ```bash
    docker-compose up --build
    ```
-3. The API will be available at `http://localhost:8080`.
-   - **📖 Documentation**:
-     - Swagger UI: `http://localhost:8080/docs`
-     - HTML Guide: `http://localhost:8080/readme`
-   - **🏥 Health**: `GET /`
-   - **✂️ Core Features**:
-     - Shorten: `POST /shorten`
-     - Redirect: `GET /:code`
-   - **🔐 Authentication**: `POST /auth/signup`, `POST /auth/login`
-   - **📋 URL Management** (auth required): `GET /urls`, `PATCH /urls/:id`, `DELETE /urls/:id`
+
+### 🔍 **Main Endpoints**
+
+- **✂️ Shorten URL**: `POST /shorten`
+- **🔗 Redirection**: `GET /:code`
+- **🔐 Signup**: `POST /auth/signup`
+- **🔑 Login**: `POST /auth/login`
+- **📋 Manage URLs** (auth): `GET /urls`, `PATCH /urls/:id`, `DELETE /urls/:id`
 
 ---
 
@@ -300,13 +391,18 @@ Prerequisites: Docker & Docker Compose installed.
 ├── coverage/                     # Relatórios de cobertura
 │   └── index.html               # Relatório HTML interativo
 ├── jest.config.ts               # Configuração Jest principal
-├── .env.example
+├── .env.example                  # Template de configuração
 ├── .gitignore
 ├── Dockerfile
-├── docker-compose.yml
+├── docker-compose.yml           # Orquestração Docker
+├── Makefile                     # Comandos make para facilitar uso
+├── quick-start.sh              # Script bash para setup rápido
 ├── package.json
 ├── tsconfig.json
-├── SWAGGER_DOCUMENTATION.md
+├── DOCKER_SECURITY.md          # Docker Compose security guide
+├── QUICK_START.md              # Super quick installation guide
+├── SWAGGER_DOCUMENTATION.md    # API documentation
+├── TEST_API.md                 # API testing guide
 └── README.md
 ```
 
