@@ -13,7 +13,11 @@ async function bootstrap() {
 
   app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
 
-  const config = new DocumentBuilder()
+  const baseUrl =
+    process.env.BASE_URL || `http://localhost:${process.env.PORT ?? 8080}`;
+  const isProduction = process.env.NODE_ENV === 'production';
+
+  const configBuilder = new DocumentBuilder()
     .setTitle('URL Shortener API')
     .setDescription(
       'API for URL shortening with authentication and management system',
@@ -33,9 +37,21 @@ async function bootstrap() {
         in: 'header',
       },
       'JWT-auth',
-    )
-    .addServer('http://localhost:8080', 'Development server')
-    .build();
+    );
+
+  if (isProduction) {
+    configBuilder.addServer(baseUrl, 'Production server');
+  } else {
+    configBuilder.addServer(baseUrl, 'Development server');
+    if (!baseUrl.includes('localhost')) {
+      configBuilder.addServer(
+        `http://localhost:${process.env.PORT ?? 8080}`,
+        'Local development',
+      );
+    }
+  }
+
+  const config = configBuilder.build();
 
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('docs', app, document, {
