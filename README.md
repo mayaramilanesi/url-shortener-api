@@ -47,12 +47,22 @@ This project includes comprehensive API documentation powered by Swagger/OpenAPI
 
 ### 🔗 Access Documentation
 
+**Local Development:**
+
 - **Interactive Swagger UI**: `http://localhost:8080/docs`
-  - Test all endpoints directly in your browser
-  - Built-in JWT authentication
-  - Real-time request/response examples
 - **HTML Documentation**: `http://localhost:8080/readme`
-  - Beautiful, responsive documentation page
+
+**Production/Cloud Deployment:**
+
+- **Interactive Swagger UI**: `https://your-domain.com/docs`
+- **HTML Documentation**: `https://your-domain.com/readme`
+
+**Features:**
+
+- Test all endpoints directly in your browser
+- Built-in JWT authentication
+- Real-time request/response examples
+- Beautiful, responsive documentation page
   - Complete API guide for beginners
   - Mobile-friendly interface
 
@@ -70,7 +80,7 @@ This project includes comprehensive API documentation powered by Swagger/OpenAPI
 ## 🛠️ Tech Stack
 
 - NestJS v11 + TypeScript
-- Node.js >=20.x (locked in `package.json` engines)
+- Node.js >=24.4.1 (latest stable version, locked in `package.json` engines)
 - PostgreSQL 15 via TypeORM
 - JWT for authentication
 - Swagger/OpenAPI for API documentation
@@ -150,81 +160,57 @@ src/
 - 🔗 **Redirection**: Functionality and click counting
 - ⚠️ **Error Handling**: Validations and edge cases
 
-### 📊 **Interpretando o Relatório de Cobertura**
+### 📊 **Understanding Coverage Report**
 
-O relatório HTML (`coverage/index.html`) mostra:
+The HTML report (`coverage/index.html`) shows:
 
-- 🟢 **Linhas Verdes**: Código coberto pelos testes
-- 🔴 **Linhas Vermelhas**: Código não testado
-- 🟡 **Linhas Amarelas**: Código parcialmente testado
+- 🟢 **Green Lines**: Code covered by tests
+- 🔴 **Red Lines**: Untested code
+- 🟡 **Yellow Lines**: Partially tested code
 
-**Métricas principais:**
+**Key metrics:**
 
-- **Statements**: Porcentagem de linhas executadas
-- **Branches**: Porcentagem de condicionais testadas (if/else)
-- **Functions**: Porcentagem de funções chamadas
-- **Lines**: Porcentagem de linhas físicas cobertas
+- **Statements**: Percentage of executed lines
+- **Branches**: Percentage of tested conditionals (if/else)
+- **Functions**: Percentage of called functions
+- **Lines**: Percentage of covered physical lines
 
-### 🚀 **Executando Testes Durante Desenvolvimento**
+### 🚀 **Running Tests During Development**
 
 ```bash
-# Para desenvolvimento ativo
-npm run test:unit:watch    # Reexecuta testes quando arquivos mudam
+# For active development
+npm run test:unit:watch    # Re-runs tests when files change
 
-# Para validação completa
-npm run test:all           # Roda tudo antes de commit
+# For complete validation
+npm run test:all           # Run everything before commit
 
-# Para debugging
-npm run test:unit -- --verbose  # Mais detalhes dos testes
+# For debugging
+npm run test:unit -- --verbose  # More test details
 ```
 
 ### 🔄 **CI/CD**
 
-Os testes são executados automaticamente em:
+Tests are automatically executed on:
 
-- **Push/PR**: Testes unitários e e2e
-- **Coverage check**: Verifica se cobertura atende aos thresholds
-- **Ambiente isolado**: Cada teste usa banco SQLite in-memory
+- **Push/PR**: Unit and e2e tests
+- **Coverage check**: Verifies coverage meets thresholds
+- **Isolated environment**: Each test uses SQLite in-memory database
 
-### 🤝 **Contribuindo com Testes**
+### 🤝 **Contributing with Tests**
 
-1. **Novos features**: Sempre incluir testes unitários
-2. **Bug fixes**: Adicionar teste que reproduz o bug
-3. **Controllers**: Testes unitários para validação de chamadas
-4. **Services**: Testes abrangentes com mocks adequados
-5. **E2E**: Para fluxos completos de usuário
+1. **New features**: Always include unit tests
+2. **Bug fixes**: Add test that reproduces the bug
+3. **Controllers**: Unit tests for call validation
+4. **Services**: Comprehensive tests with proper mocks
+5. **E2E**: For complete user flows
 
-**Convenções:**
+**Conventions:**
 
-- Arquivos de teste: `*.spec.ts` (unitários) e `*.e2e-spec.ts` (e2e)
-- Mocks: Use Jest mocks para dependências externas
-- Cleanup: Sempre limpe dados de teste (especialmente e2e)
+- Test files: `*.spec.ts` (unit) and `*.e2e-spec.ts` (e2e)
+- Mocks: Use Jest mocks for external dependencies
+- Cleanup: Always clean test data (especially e2e)
 
 ---
-
-## 🚀 Quick Start (Docker)
-
-**Prerequisites:** Docker & Docker Compose installed.
-
-### 🎯 **Single Command - Run Everything Automatically**
-
-```bash
-# Option 1: Using Make (recommended)
-make setup
-
-# Option 2: Using bash script
-./quick-start.sh
-
-# Option 3: Using npm
-npm run dev:quick
-```
-
-**That's it!** 🎉 In a few seconds you'll have:
-
-- ✅ PostgreSQL database configured automatically
-- ✅ API running at `http://localhost:8080`
-- ✅ `.env` file created with default settings
-- ✅ Everything working without any manual configuration
 
 ### 📱 **Accessing the API**
 
@@ -232,8 +218,10 @@ After running the command above, access:
 
 - **🌐 API**: `http://localhost:8080`
 - **📖 Swagger UI**: `http://localhost:8080/docs`
-- **📄 Documentação HTML**: `http://localhost:8080/readme`
+- **📄 HTML Documentation**: `http://localhost:8080/readme`
 - **🏥 Health Check**: `GET http://localhost:8080`
+
+> 💡 **Note:** For production/cloud deployments, replace `localhost:8080` with your actual domain (e.g., `https://your-domain.com`)
 
 ### 🔧 **Management Commands**
 
@@ -312,7 +300,9 @@ If you want to customize the settings:
 
 ## 📥 Running Locally (dev mode)
 
-1. Ensure Node.js v20.x installed.
+> 💡 **Quick Option:** For a faster setup, use `make setup` instead of the steps below (requires Docker)
+
+1. Ensure Node.js v24.4.1+ installed.
 2. Copy `.env.example` → `.env` and fill in values.
 3. Install dependencies
    ```bash
@@ -357,7 +347,7 @@ If you want to customize the settings:
 .
 ├── src/
 │   ├── auth/
-│   │   ├── *.spec.ts              # Testes unitários
+│   │   ├── *.spec.ts              # Unit tests
 │   │   ├── auth.controller.ts
 │   │   ├── auth.service.ts
 │   │   └── dto/
@@ -365,11 +355,11 @@ If you want to customize the settings:
 │   │   ├── docs.controller.ts
 │   │   └── docs.module.ts
 │   ├── users/
-│   │   ├── *.spec.ts              # Testes unitários
+│   │   ├── *.spec.ts              # Unit tests
 │   │   ├── users.service.ts
 │   │   └── entities/
 │   ├── urls/
-│   │   ├── *.spec.ts              # Testes unitários
+│   │   ├── *.spec.ts              # Unit tests
 │   │   ├── dto/
 │   │   ├── entities/
 │   │   ├── redirect.controller.ts
@@ -383,26 +373,25 @@ If you want to customize the settings:
 │   ├── app.service.ts
 │   └── main.ts
 ├── test/
-│   ├── app.e2e-spec.ts           # Testes e2e completos
-│   ├── jest-e2e.json             # Config Jest e2e
-│   ├── setup.ts                  # Setup global
-│   ├── test-app.module.ts        # Módulo para testes
-│   └── test-database.module.ts   # Config banco SQLite
-├── coverage/                     # Relatórios de cobertura
-│   └── index.html               # Relatório HTML interativo
-├── jest.config.ts               # Configuração Jest principal
-├── .env.example                  # Template de configuração
+│   ├── app.e2e-spec.ts           # Complete e2e tests
+│   ├── jest-e2e.json             # Jest e2e configuration
+│   ├── setup.ts                  # Global setup
+│   ├── test-app.module.ts        # Module for tests
+│   └── test-database.module.ts   # SQLite database configuration
+├── coverage/                     # Coverage reports
+│   └── index.html               # Interactive HTML report
+├── jest.config.ts               # Main Jest configuration
+├── .env.example                  # Configuration template
 ├── .gitignore
 ├── Dockerfile
-├── docker-compose.yml           # Orquestração Docker
-├── Makefile                     # Comandos make para facilitar uso
-├── quick-start.sh              # Script bash para setup rápido
+├── docker-compose.yml           # Docker orchestration
+├── Makefile                     # Make commands for easy usage
+├── quick-start.sh              # Bash script for quick setup
 ├── package.json
 ├── tsconfig.json
 ├── DOCKER_SECURITY.md          # Docker Compose security guide
 ├── QUICK_START.md              # Super quick installation guide
 ├── SWAGGER_DOCUMENTATION.md    # API documentation
-├── TEST_API.md                 # API testing guide
 └── README.md
 ```
 
@@ -425,20 +414,5 @@ Release tags:
 - `v0.2.0` — authentication implemented
 - `v0.3.0` — per-user URL management
 - `v0.4.0` — complete Swagger/OpenAPI documentation
-
----
-
-## 📚 Contributing to Documentation
-
-The API documentation is automatically generated from code annotations. To update documentation:
-
-1. Update Swagger decorators in controllers (`@ApiOperation`, `@ApiResponse`, etc.)
-2. Update DTOs with `@ApiProperty` annotations
-3. Modify `SWAGGER_DOCUMENTATION.md` for additional guidance
-4. The documentation will be automatically updated when the application restarts
-
----
-
-## 📄 License
-
-Licensed under the MIT License. See LICENSE for details.
+- `v0.5.0` — comprehensive testing suite with unit and e2e tests
+- `v0.6.0` — Docker automation with one-command setup

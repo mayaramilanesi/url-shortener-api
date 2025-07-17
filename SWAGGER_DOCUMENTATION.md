@@ -6,19 +6,31 @@ Complete Swagger documentation has been implemented for the URL shortening API. 
 
 ## 🚀 How to Access Documentation
 
+### 🏠 Local Development
+
 1. **Start the application:**
 
    ```bash
-   npm run start:dev
+   make setup
    ```
 
-2. **Access Swagger UI:**
-   - URL: `http://localhost:8080/docs`
-   - Complete interactive interface with all documented endpoints
+   > 💡 **Alternative:** You can also use `npm run start:dev` for local development without Docker
 
-3. **Access HTML Documentation:**
-   - URL: `http://localhost:8080/readme`
-   - Beautiful HTML page with complete documentation, ideal for beginners
+2. **Access Documentation:**
+   - **Swagger UI**: `http://localhost:8080/docs`
+   - **HTML Documentation**: `http://localhost:8080/readme`
+
+### ☁️ Production/Cloud Deployment
+
+1. **Access Documentation** (replace `your-domain.com` with your actual domain):
+   - **Swagger UI**: `https://your-domain.com/docs`
+   - **HTML Documentation**: `https://your-domain.com/readme`
+
+### 📱 Features Available
+
+- **Interactive Swagger UI**: Complete interface with all documented endpoints
+- **HTML Documentation**: Beautiful, responsive page ideal for beginners
+- **Real-time Testing**: Test all endpoints directly from the documentation
 
 ## 📚 Documented Features
 
@@ -41,7 +53,7 @@ Complete Swagger documentation has been implemented for the URL shortening API. 
 
 - **GET /:code** - Redirect to original URL (DO NOT TEST IN SWAGGER)
 
-> ⚠️ **IMPORTANT:** The redirect endpoint is marked as **deprecated** in Swagger to avoid confusion. It works normally, but should be tested directly in the browser (e.g., `http://localhost:8080/abc123`), not through the Swagger interface.
+> ⚠️ **IMPORTANT:** The redirect endpoint is marked as **deprecated** in Swagger to avoid confusion. It works normally, but should be tested directly in the browser (e.g., `https://your-domain.com/abc123` or `http://localhost:8080/abc123` for local development), not through the Swagger interface.
 
 ## 🔑 JWT Authentication
 
@@ -119,11 +131,19 @@ Authorization: Bearer {your-jwt-token}
 
 ### 5. Test redirection (in browser):
 
+**Local Development:**
+
 ```
 http://localhost:8080/{returned-code}
 ```
 
-_Example: If `/shorten` returned `http://localhost:8080/abc123`, access this URL directly in the browser_
+**Production/Cloud:**
+
+```
+https://your-domain.com/{returned-code}
+```
+
+_Example: If `/shorten` returned `https://your-domain.com/abc123`, access this URL directly in the browser_
 
 ## 🛠️ Implemented Features
 
@@ -196,4 +216,9 @@ The HTML documentation page offers:
 - Ideal for beginner users
 - Mobile-friendly interface
 
-To use, simply access `http://localhost:8080/docs` for Swagger or `http://localhost:8080/readme` for HTML documentation after starting the application!
+**To access the documentation:**
+
+- **Local Development:** `http://localhost:8080/docs` (Swagger) or `http://localhost:8080/readme` (HTML)
+- **Production/Cloud:** `https://your-domain.com/docs` (Swagger) or `https://your-domain.com/readme` (HTML)
+
+Replace `your-domain.com` with your actual deployed domain!

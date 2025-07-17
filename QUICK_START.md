@@ -34,6 +34,8 @@ The API will be available at:
 - **📖 Swagger UI**: http://localhost:8080/docs
 - **📄 Documentation**: http://localhost:8080/readme
 
+> 💡 **For production/cloud deployments:** Replace `localhost:8080` with your actual domain
+
 ---
 
 ## 🔧 Useful commands
